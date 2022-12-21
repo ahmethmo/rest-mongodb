@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  mongo-db:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+  rest-book:
+    image: "ahmethmo/rest-mongodb:last"
+    ports:
+      - "8080:8080"
+
+# "Docker Image" isteniyorsa alttaki extention eklenmeli
+# mvn quarkus:add-extension -Dextensions='container-image-docker'
+
+# Docker dosyasını çalıştırmak
+# docker-compose -f docker-compose.yaml up -d
+
+# MongoDB bağlantı linki
+# mongodb://root:root@localhost:27017
+
+# Docker Image'e dönüştür
+# mvn package -DskipTests=true
+
+# Docker da Uyulamayı ayağa kaldırıyoruz
+# docker run -d --network="resources_db-rest-network" -p 8080:8080 --name dbRest ahmethmo/rest-mongodb:last
+# docker run -i --rm --net=db-rest-network -p 8080:8080 --name dbRest ahmethmo/rest-mongodb:last
+
+
